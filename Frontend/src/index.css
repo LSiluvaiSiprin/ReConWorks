@@ -1,0 +1,132 @@
+/* ========================================
+   GLOBAL RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+/* ========================================
+   HTML
+======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background: #ffffff;
+
+  color: #1f2937;
+
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   ROOT
+======================================== */
+
+#root {
+  min-height: 100vh;
+}
+
+/* ========================================
+   COMMON ELEMENTS
+======================================== */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ========================================
+   THEME VARIABLES
+======================================== */
+
+:root {
+  /* Primary Red */
+
+  --primary: #ef4444;
+
+  --primary-dark: #dc2626;
+
+  --primary-light: #fef2f2;
+
+  --primary-border: #fecaca;
+
+  /* Green */
+
+  --secondary: #22c55e;
+
+  --secondary-dark: #16a34a;
+
+  --secondary-light: #f0fdf4;
+
+  --secondary-border: #bbf7d0;
+
+  /* Text */
+
+  --text-primary: #1f2937;
+
+  --text-secondary: #4b5563;
+
+  --text-light: #6b7280;
+
+  /* Background */
+
+  --bg-white: #ffffff;
+
+  --bg-light: #f8fafc;
+
+  --bg-gray: #f3f4f6;
+
+  /* Border */
+
+  --border: #e5e7eb;
+
+  --border-dark: #d1d5db;
+
+  /* Shadow */
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.1);
+}

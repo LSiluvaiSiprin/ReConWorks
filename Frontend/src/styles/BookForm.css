@@ -1,0 +1,369 @@
+/* ========================================
+   BOOKING FORM
+======================================== */
+
+.booking-form {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+}
+
+/* ========================================
+   FORM GROUP
+======================================== */
+
+.form-group {
+  width: 100%;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #374151;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+}
+
+.form-group label span {
+  margin-left: 6px;
+
+  color: #9ca3af;
+
+  font-size: 0.72rem;
+
+  font-weight: 400;
+}
+
+/* ========================================
+   INPUT WRAPPER
+======================================== */
+
+.input-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+/* ========================================
+   ICON
+======================================== */
+
+.input-wrapper > i {
+  position: absolute;
+
+  left: 15px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #9ca3af;
+
+  font-size: 0.85rem;
+
+  pointer-events: none;
+
+  transition: color 0.2s ease;
+}
+
+/* ========================================
+   INPUT / SELECT / TEXTAREA
+======================================== */
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+  width: 100%;
+
+  padding: 13px 15px 13px 43px;
+
+  color: #1f2937;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 0.84rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* ========================================
+   PLACEHOLDER
+======================================== */
+
+.input-wrapper input::placeholder,
+.input-wrapper textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* ========================================
+   FOCUS
+======================================== */
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+  border-color: #ef4444;
+
+  background: #fffafa;
+
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.input-wrapper:focus-within > i {
+  color: #ef4444;
+}
+
+/* ========================================
+   SELECT
+======================================== */
+
+.select-wrapper select {
+  appearance: none;
+
+  cursor: pointer;
+
+  padding-right: 40px;
+}
+
+.select-wrapper::after {
+  content: "\f078";
+
+  position: absolute;
+
+  right: 15px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #9ca3af;
+
+  font-family: "Font Awesome 6 Free";
+
+  font-size: 0.7rem;
+
+  font-weight: 900;
+
+  pointer-events: none;
+}
+
+/* ========================================
+   DATE
+======================================== */
+
+.input-wrapper input[type="date"] {
+  cursor: pointer;
+
+  color: #374151;
+}
+
+.input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+
+  opacity: 0.6;
+}
+
+/* ========================================
+   TEXTAREA
+======================================== */
+
+.textarea-wrapper {
+  position: relative;
+}
+
+.textarea-wrapper > i {
+  top: 18px;
+
+  transform: none;
+}
+
+.input-wrapper textarea {
+  min-height: 105px;
+
+  resize: vertical;
+
+  line-height: 1.6;
+}
+
+/* ========================================
+   BOOKING MESSAGE
+======================================== */
+
+.booking-message {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  padding: 12px 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border-radius: 9px;
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+/* SUCCESS */
+
+.booking-message.success {
+  color: #166534;
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+}
+
+.booking-message.success i {
+  color: #16a34a;
+}
+
+/* ERROR */
+
+.booking-message.error {
+  color: #b91c1c;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+}
+
+.booking-message.error i {
+  color: #ef4444;
+}
+
+/* ========================================
+   SUBMIT
+======================================== */
+
+.booking-submit {
+  width: 100%;
+
+  margin-top: 5px;
+}
+
+.booking-submit .btn {
+  width: 100%;
+}
+
+/* ========================================
+   BUTTON LOADING
+======================================== */
+
+.booking-submit .btn:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+}
+
+/* ========================================
+   ERROR STATE
+======================================== */
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: #ef4444;
+
+  background: #fffafa;
+}
+
+/* ========================================
+   HOVER
+======================================== */
+
+.input-wrapper input:hover,
+.input-wrapper select:hover,
+.input-wrapper textarea:hover {
+  border-color: #bfc4cc;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 768px) {
+  .booking-form {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .booking-message {
+    grid-column: auto;
+  }
+
+  .booking-submit {
+    grid-column: auto;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+  .booking-form {
+    gap: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.78rem;
+  }
+
+  .input-wrapper input,
+  .input-wrapper select,
+  .input-wrapper textarea {
+    padding: 12px 13px 12px 40px;
+
+    font-size: 0.8rem;
+  }
+
+  .input-wrapper > i {
+    left: 13px;
+
+    font-size: 0.8rem;
+  }
+
+  .textarea-wrapper > i {
+    top: 16px;
+  }
+
+  .booking-message {
+    padding: 11px 12px;
+
+    font-size: 0.75rem;
+  }
+}
