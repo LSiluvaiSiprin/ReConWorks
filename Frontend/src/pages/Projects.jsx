@@ -1,5 +1,12 @@
+import { Link } from "react-router-dom";
 import ProjectCard from "../components/ProjectCards";
 import "../styles/Projects.css";
+import modern from "../assets/image/modern.webp";
+import office from "../assets/image/office.jpg";
+import renovation from "../assets/image/renovation.jpeg";
+import luxindes from "../assets/image/Luxury_Interior_Design.jpg"
+import flores from "../assets/image/Two_Floor_Residence.webp";
+import mall from "../assets/image/mall.jpg";
 
 function Projects() {
   return (
@@ -119,6 +126,7 @@ function Projects() {
           {/* Project 1 */}
 
           <ProjectCard
+            image={modern}
             category="Residential"
             title="Modern Family Home"
             description="A contemporary residential building designed with spacious rooms, modern architecture and quality finishing."
@@ -133,6 +141,7 @@ function Projects() {
           {/* Project 2 */}
 
           <ProjectCard
+            image={office}
             category="Commercial"
             title="Modern Office Building"
             description="A professional commercial space designed to provide a productive and comfortable working environment."
@@ -147,6 +156,7 @@ function Projects() {
           {/* Project 3 */}
 
           <ProjectCard
+            image={renovation}
             category="Renovation"
             title="Complete Home Renovation"
             description="A complete transformation of an existing home with modern interiors, improved spaces and fresh finishing."
@@ -161,6 +171,7 @@ function Projects() {
           {/* Project 4 */}
 
           <ProjectCard
+            image={luxindes}
             category="Interior"
             title="Luxury Interior Design"
             description="A stylish interior project combining modern design, functional spaces and premium finishing."
@@ -175,6 +186,7 @@ function Projects() {
           {/* Project 5 */}
 
           <ProjectCard
+            image={flores}
             category="Residential"
             title="Two Floor Residence"
             description="A spacious two-floor residence developed with a focus on durability, functionality and modern design."
@@ -189,6 +201,7 @@ function Projects() {
           {/* Project 6 */}
 
           <ProjectCard
+            image={mall}
             category="Commercial"
             title="Retail Space Development"
             description="A modern retail space developed to provide an attractive layout and practical customer experience."
@@ -344,8 +357,8 @@ function Projects() {
             let's turn your ideas into reality.
           </p>
 
-          <a
-            href="/booking"
+          <Link
+            to="/booking"
             className="projects-cta-button"
           >
 
@@ -353,7 +366,7 @@ function Projects() {
 
             Book a Service
 
-          </a>
+          </Link>
 
         </div>
 

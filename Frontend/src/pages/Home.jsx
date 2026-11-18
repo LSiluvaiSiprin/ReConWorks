@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
 import ServiceCard from "../components/ServiceCards";
 import ProjectCard from "../components/ProjectCards";
 import Button from "../components/Button";
 import "../styles/Home.css";
+import modern from "../assets/image/modern.webp";
+import office from "../assets/image/office.jpg";
+import renovation from "../assets/image/renovation.jpeg";
 
 function Home() {
   return (
@@ -307,6 +309,7 @@ function Home() {
 
         <div className="home-projects-grid">
           <ProjectCard
+            image={modern}
             category="Residential"
             title="Modern Family Home"
             description="A contemporary residential building designed with spacious rooms, modern architecture and quality finishing."
@@ -314,6 +317,7 @@ function Home() {
           />
 
           <ProjectCard
+            image={office}
             category="Commercial"
             title="Modern Office Building"
             description="A professional commercial space designed for a productive and comfortable working environment."
@@ -321,6 +325,7 @@ function Home() {
           />
 
           <ProjectCard
+            image={renovation}
             category="Renovation"
             title="Complete Home Renovation"
             description="A complete transformation of an existing home with modern interiors and fresh finishing."
