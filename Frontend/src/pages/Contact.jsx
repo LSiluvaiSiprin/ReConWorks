@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import Button from "../components/Button";
 import "../styles/contact.css";
 
@@ -24,6 +25,7 @@ function Contact() {
     }));
   };
 
+  // Submit Contact Form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,11 +33,11 @@ function Contact() {
     setError("");
 
     if (
-      !formData.name ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.subject ||
-      !formData.message
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.subject.trim() ||
+      !formData.message.trim()
     ) {
       setError("Please fill in all fields.");
       return;
@@ -44,13 +46,17 @@ function Contact() {
     try {
       setLoading(true);
 
-      // MongoDB API will be connected later.
-      // For now, testing frontend only.
+      const response = await axios.post(
+        "http://127.0.0.1:5000/api/contacts",
+        formData,
+      );
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (!response.data.success) {
+        throw new Error(response.data.message || "Message submission failed");
+      }
 
       setSuccess(
-        "Your message has been sent successfully. We will contact you soon!"
+        "Your message has been sent successfully. We will contact you soon!",
       );
 
       setFormData({
@@ -62,7 +68,12 @@ function Contact() {
       });
     } catch (err) {
       console.error("Contact error:", err);
-      setError("Something went wrong. Please try again.");
+
+      setError(
+        err.response?.data?.message ||
+          err.message ||
+          "Something went wrong. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -70,18 +81,11 @@ function Contact() {
 
   return (
     <main className="contact-page">
-
-      {/* ================================
-          HERO
-      ================================= */}
+      {/* HERO */}
 
       <section className="contact-hero">
-
         <div className="contact-hero-content">
-
-          <span className="contact-label">
-            GET IN TOUCH
-          </span>
+          <span className="contact-label">GET IN TOUCH</span>
 
           <h1>
             Let's Build Something
@@ -89,100 +93,62 @@ function Contact() {
           </h1>
 
           <p>
-            Have a construction project in mind?
-            Contact our team and let us help turn
-            your vision into reality.
+            Have a construction project in mind? Contact our team and let us
+            help turn your vision into reality.
           </p>
-
         </div>
-
       </section>
 
-
-      {/* ================================
-          CONTACT SECTION
-      ================================= */}
+      {/* CONTACT SECTION */}
 
       <section className="contact-section">
-
         <div className="contact-container">
-
           {/* CONTACT INFORMATION */}
 
           <div className="contact-info">
-
             <h2>
               Contact <span>Us</span>
             </h2>
 
             <p className="contact-description">
-              Whether you are planning a new construction,
-              renovation, or commercial project, our team
-              is ready to help.
+              Whether you are planning a new construction, renovation, or
+              commercial project, our team is ready to help.
             </p>
 
-
-            {/* Location */}
-
             <div className="contact-info-item">
-
               <div className="contact-icon">
                 <i className="fa-solid fa-location-dot"></i>
               </div>
 
               <div>
                 <h3>Our Location</h3>
-
-                <p>
-                  Chennai, Tamil Nadu, India
-                </p>
+                <p>Chennai, Tamil Nadu, India</p>
               </div>
-
             </div>
 
-
-            {/* Phone */}
-
             <div className="contact-info-item">
-
               <div className="contact-icon green">
                 <i className="fa-solid fa-phone"></i>
               </div>
 
               <div>
                 <h3>Phone Number</h3>
-
-                <p>
-                  +91 98765 43210
-                </p>
+                <p>+91 98765 43210</p>
               </div>
-
             </div>
 
-
-            {/* Email */}
-
             <div className="contact-info-item">
-
               <div className="contact-icon">
                 <i className="fa-solid fa-envelope"></i>
               </div>
 
               <div>
                 <h3>Email Address</h3>
-
-                <p>
-                  reconworks@gmail.com
-                </p>
+                <p>reconworks@gmail.com</p>
               </div>
-
             </div>
 
-
-            {/* Working Hours */}
-
             <div className="contact-info-item">
-
               <div className="contact-icon green">
                 <i className="fa-solid fa-clock"></i>
               </div>
@@ -196,18 +162,12 @@ function Contact() {
                   9:00 AM - 6:00 PM
                 </p>
               </div>
-
             </div>
 
-
-            {/* Social */}
-
             <div className="contact-social">
-
               <h3>Follow Us</h3>
 
               <div className="contact-social-links">
-
                 <a href="#" aria-label="Facebook">
                   <i className="fa-brands fa-facebook-f"></i>
                 </a>
@@ -223,75 +183,48 @@ function Contact() {
                 <a href="#" aria-label="Twitter">
                   <i className="fa-brands fa-x-twitter"></i>
                 </a>
-
               </div>
-
             </div>
-
           </div>
-
 
           {/* CONTACT FORM */}
 
           <div className="contact-form-wrapper">
-
             <div className="contact-form-header">
-
-              <h2>
-                Send Us a Message
-              </h2>
+              <h2>Send Us a Message</h2>
 
               <p>
-                Fill out the form below and our team
-                will get back to you shortly.
+                Fill out the form below and our team will get back to you
+                shortly.
               </p>
-
             </div>
 
-
-            <form
-              className="contact-form"
-              onSubmit={handleSubmit}
-            >
-
-              {/* Success */}
+            <form className="contact-form" onSubmit={handleSubmit}>
+              {/* Success Message */}
 
               {success && (
                 <div className="contact-message success">
-
                   <i className="fa-solid fa-circle-check"></i>
-
                   <span>{success}</span>
-
                 </div>
               )}
 
-
-              {/* Error */}
+              {/* Error Message */}
 
               {error && (
                 <div className="contact-message error">
-
                   <i className="fa-solid fa-circle-exclamation"></i>
-
                   <span>{error}</span>
-
                 </div>
               )}
-
 
               {/* Name + Email */}
 
               <div className="contact-form-row">
-
                 <div className="contact-form-group">
-
-                  <label htmlFor="contact-name">
-                    Full Name
-                  </label>
+                  <label htmlFor="contact-name">Full Name</label>
 
                   <div className="contact-input-wrapper">
-
                     <i className="fa-solid fa-user"></i>
 
                     <input
@@ -303,20 +236,13 @@ function Contact() {
                       placeholder="Enter your full name"
                       required
                     />
-
                   </div>
-
                 </div>
 
-
                 <div className="contact-form-group">
-
-                  <label htmlFor="contact-email">
-                    Email Address
-                  </label>
+                  <label htmlFor="contact-email">Email Address</label>
 
                   <div className="contact-input-wrapper">
-
                     <i className="fa-solid fa-envelope"></i>
 
                     <input
@@ -328,26 +254,17 @@ function Contact() {
                       placeholder="Enter your email"
                       required
                     />
-
                   </div>
-
                 </div>
-
               </div>
-
 
               {/* Phone + Subject */}
 
               <div className="contact-form-row">
-
                 <div className="contact-form-group">
-
-                  <label htmlFor="contact-phone">
-                    Phone Number
-                  </label>
+                  <label htmlFor="contact-phone">Phone Number</label>
 
                   <div className="contact-input-wrapper">
-
                     <i className="fa-solid fa-phone"></i>
 
                     <input
@@ -359,20 +276,13 @@ function Contact() {
                       placeholder="Enter your phone number"
                       required
                     />
-
                   </div>
-
                 </div>
 
-
                 <div className="contact-form-group">
-
-                  <label htmlFor="contact-subject">
-                    Subject
-                  </label>
+                  <label htmlFor="contact-subject">Subject</label>
 
                   <div className="contact-input-wrapper">
-
                     <i className="fa-solid fa-tag"></i>
 
                     <input
@@ -384,24 +294,16 @@ function Contact() {
                       placeholder="What is this about?"
                       required
                     />
-
                   </div>
-
                 </div>
-
               </div>
-
 
               {/* Message */}
 
               <div className="contact-form-group full-width">
-
-                <label htmlFor="contact-message">
-                  Message
-                </label>
+                <label htmlFor="contact-message">Message</label>
 
                 <div className="contact-input-wrapper textarea-wrapper">
-
                   <i className="fa-solid fa-message"></i>
 
                   <textarea
@@ -413,16 +315,12 @@ function Contact() {
                     rows="6"
                     required
                   ></textarea>
-
                 </div>
-
               </div>
-
 
               {/* Submit */}
 
               <div className="contact-submit">
-
                 <Button
                   type="submit"
                   variant="primary"
@@ -435,17 +333,11 @@ function Contact() {
                 >
                   {loading ? "Sending..." : "Send Message"}
                 </Button>
-
               </div>
-
             </form>
-
           </div>
-
         </div>
-
       </section>
-
     </main>
   );
 }

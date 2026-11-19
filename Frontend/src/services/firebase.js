@@ -8,6 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 import {
     getAuth,
     GoogleAuthProvider,
+    GithubAuthProvider,
 } from "firebase/auth";
 
 // Firebase configuration
@@ -33,10 +34,14 @@ const auth = getAuth(app);
 // Google Authentication Provider
 const googleProvider = new GoogleAuthProvider();
 
+// GitHub Authentication Provider
+const githubProvider = new GithubAuthProvider();
+
 // Export
 export {
     app,
     analytics,
     auth,
     googleProvider,
+    githubProvider,
 };

@@ -7,7 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-import { auth, googleProvider } from "../services/firebase";
+import { auth, googleProvider, githubProvider } from "../services/firebase";
 import "../styles/Login.css";
 
 function Login() {
@@ -18,6 +18,7 @@ function Login() {
 
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [githubLoading, setGithubLoading] = useState(false);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -144,6 +145,57 @@ function Login() {
       }
     } finally {
       setGoogleLoading(false);
+    }
+  };
+
+  // ==============================
+  // GITHUB LOGIN
+  // ==============================
+  const handleGithubLogin = async () => {
+    setError("");
+    setSuccess("");
+
+    try {
+      setGithubLoading(true);
+
+      await signInWithPopup(auth, githubProvider);
+
+      setSuccess("GitHub login successful! Redirecting...");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    } catch (err) {
+      console.error("GitHub Login Error:", err);
+
+      switch (err.code) {
+        case "auth/popup-closed-by-user":
+          setError("GitHub login was cancelled.");
+          break;
+
+        case "auth/popup-blocked":
+          setError(
+            "GitHub login popup was blocked. Please allow popups."
+          );
+          break;
+
+        case "auth/account-exists-with-different-credential":
+          setError(
+            "An account already exists with this email using another login method."
+          );
+          break;
+
+        case "auth/network-request-failed":
+          setError(
+            "Network error. Please check your internet connection."
+          );
+          break;
+
+        default:
+          setError("GitHub login failed. Please try again.");
+      }
+    } finally {
+      setGithubLoading(false);
     }
   };
 
@@ -338,7 +390,7 @@ function Login() {
                       setEmail(e.target.value)
                     }
                     autoComplete="email"
-                    disabled={loading || googleLoading}
+                    disabled={loading || googleLoading || githubLoading}
                     required
                   />
 
@@ -357,7 +409,7 @@ function Login() {
                   <button
                     type="button"
                     onClick={handleForgotPassword}
-                    disabled={loading || googleLoading}
+                    disabled={loading || googleLoading || githubLoading}
                   >
                     Forgot Password?
                   </button>
@@ -377,7 +429,7 @@ function Login() {
                       setPassword(e.target.value)
                     }
                     autoComplete="current-password"
-                    disabled={loading || googleLoading}
+                    disabled={loading || googleLoading || githubLoading}
                     required
                   />
 
@@ -388,7 +440,7 @@ function Login() {
               <button
                 type="submit"
                 className="login-button"
-                disabled={loading || googleLoading}
+                disabled={loading || googleLoading || githubLoading}
               >
 
                 {loading ? (
@@ -419,7 +471,7 @@ function Login() {
               type="button"
               className="google-button"
               onClick={handleGoogleLogin}
-              disabled={loading || googleLoading}
+              disabled={loading || googleLoading || githubLoading}
             >
 
               {googleLoading ? (
@@ -434,6 +486,26 @@ function Login() {
                 </>
               )}
 
+            </button>
+
+            {/* GITHUB LOGIN */}
+            <button
+              type="button"
+              className="github-button"
+              onClick={handleGithubLogin}
+              disabled={loading || googleLoading || githubLoading}
+            >
+              {githubLoading ? (
+                <>
+                  <i className="fa-solid fa-spinner fa-spin"></i>
+                  Connecting...
+                </>
+              ) : (
+                <>
+                  <i className="fa-brands fa-github"></i>
+                  Continue with GitHub
+                </>
+              )}
             </button>
 
             {/* Register */}
